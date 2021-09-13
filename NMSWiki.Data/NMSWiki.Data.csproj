@@ -85,9 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Ingredients.cs" />
-    <Compile Include="PlanetResources.cs" />
-    <Compile Include="PlanetTypes.cs" />
+    <Compile Include="Ingredient.cs" />
+    <Compile Include="PlanetResource.cs" />
+    <Compile Include="PlanetType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
