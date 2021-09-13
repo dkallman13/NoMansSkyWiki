@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NMSWiki.Models
+{
+    public class PlanetResourceList
+    {
+        public int PlanetResourceId { get; set; }
+
+        public int PlanetId { get; set; }
+
+        public int ResourceId { get; set; }
+    }
+}

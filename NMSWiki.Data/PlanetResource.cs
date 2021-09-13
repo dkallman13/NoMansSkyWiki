@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NMSWiki.Data
 {
-    public class PlanetTypes
+    public class PlanetResource
     {
         [Key]
-        public int PlanetId { get; set; }
+        public int PlanetResourceId { get; set; }
+
         [Required]
-        public string Name { get; set; }
+        [ForeignKey(nameof(Planets))]
+        public int PlanetId { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(Resources))]
+        public int ResourceId { get; set; }
     }
 }
