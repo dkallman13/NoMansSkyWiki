@@ -86,6 +86,9 @@
   <ItemGroup>
     <Compile Include="Craftable.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Ingredient.cs" />
+    <Compile Include="PlanetResource.cs" />
+    <Compile Include="PlanetType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

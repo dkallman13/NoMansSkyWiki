@@ -58,6 +58,12 @@
     <Compile Include="CraftableDetail.cs" />
     <Compile Include="CraftableEdit.cs" />
     <Compile Include="CraftableListItem.cs" />
+    <Compile Include="IngredientCreate.cs" />
+    <Compile Include="IngredientList.cs" />
+    <Compile Include="PlanetResourceCreate.cs" />
+    <Compile Include="PlanetResourceList.cs" />
+    <Compile Include="PlanetTypeCreate.cs" />
+    <Compile Include="PlanetTypeList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
