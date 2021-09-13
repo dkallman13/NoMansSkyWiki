@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CraftableAdd.cs" />
+    <Compile Include="CraftableDetail.cs" />
+    <Compile Include="CraftableEdit.cs" />
+    <Compile Include="CraftableListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Craftable.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
