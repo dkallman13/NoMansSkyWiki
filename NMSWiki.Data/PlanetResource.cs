@@ -15,7 +15,7 @@ namespace NMSWiki.Data
 
         [Required]
         [ForeignKey(nameof(PlanetType))]
-        public int PlanetId { get; set; }
+        public int PlanetTypeId { get; set; }
 
         [Required]
         [ForeignKey(nameof(Resource))]

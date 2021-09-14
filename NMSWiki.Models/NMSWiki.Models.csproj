@@ -59,9 +59,11 @@
     <Compile Include="CraftableEdit.cs" />
     <Compile Include="CraftableListItem.cs" />
     <Compile Include="IngredientCreate.cs" />
+    <Compile Include="IngredientDetail.cs" />
     <Compile Include="IngredientList.cs" />
     <Compile Include="PlanetResourceCreate.cs" />
     <Compile Include="PlanetResourceDetail.cs" />
+    <Compile Include="PlanetResourceEdit.cs" />
     <Compile Include="PlanetResourceList.cs" />
     <Compile Include="PlanetTypeCreate.cs" />
     <Compile Include="PlanetTypeDetail.cs" />
