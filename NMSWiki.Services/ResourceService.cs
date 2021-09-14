@@ -16,7 +16,9 @@ namespace NMSWiki.Services
                 new Resource()
                 {
                     Name = model.Name,
-                    Description = model.Desc
+                    Description = model.Desc,
+                    PlanetResourceId = model.PlanetResourceId,
+                    IngredientId = model.IngredientId
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -35,9 +37,11 @@ namespace NMSWiki.Services
                             e =>
                                 new ResourceDetail()
                                 {
-                                    Id = e.Id,
+                                    Id = e.ResourceId,
                                     Name = e.Name,
-                                    Desc = e.Description
+                                    Desc = e.Description,
+                                    PlanetResourceId = e.PlanetResourceId,
+                                    IngredientId = e.IngredientId
                                 }
                         );
 
@@ -49,11 +53,16 @@ namespace NMSWiki.Services
             using (var ctx = new ApplicationDbContext())
             {
 
-                List<int> ingredientids = GetResourceById(id).IngredientId;
+                string[] PlanetIdsString = GetResourceById(id).PlanetResourceId.Split(',');
+                int[] ingredientids = { };
+                foreach (string planettypeid in PlanetIdsString)
+                {
+                    ingredientids.Append(Int32.Parse(planettypeid));
+                }
                 var query =
                     ctx
                         .Craftables
-                        .Where(e => e.IngredientIds == ingredientids)
+                        .Where(e => e.IngredientId == ingredientids)
                         .SelectMany(
                             e => ctx.Craftables
                         );
@@ -61,12 +70,18 @@ namespace NMSWiki.Services
                 return query.ToArray();
             }
         }
+
         public IEnumerable<PlanetType> GetRelatedPlanetTypes(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
 
-                List<int> PlanetIds = GetResourceById(id).PlanetResourceId;
+                string[] PlanetIdsString = GetResourceById(id).PlanetResourceId.Split(',');
+                int[] PlanetIds = { };
+                foreach (string planettypeid in PlanetIdsString)
+                {
+                    PlanetIds.Append(Int32.Parse(planettypeid));
+                }
                 var query =
                     ctx
                         .PlanetTypes
@@ -85,11 +100,11 @@ namespace NMSWiki.Services
                 var entity =
                     ctx
                         .Resources
-                        .Single(e => e.Id == id);
+                        .Single(e => e.ResourceId == id);
                 return
                     new ResourceDetail()
                     {
-                        Id = entity.Id,
+                        Id = entity.ResourceId,
                         Name = entity.Name,
                         Desc = entity.Description,
                         IngredientId  = entity.IngredientId,
@@ -104,10 +119,12 @@ namespace NMSWiki.Services
                 var entity =
                     ctx
                         .Resources
-                        .Single(e => e.Id == model.ResourceId);
+                        .Single(e => e.ResourceId == model.ResourceId);
 
                 entity.Name = model.Name;
                 entity.Description = model.Desc;
+                entity.PlanetResourceId = model.PlanetResourceId;
+                entity.IngredientId = model.IngredientId;
 
                 return ctx.SaveChanges() == 1;
             }

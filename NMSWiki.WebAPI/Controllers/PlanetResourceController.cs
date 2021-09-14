@@ -18,6 +18,7 @@ namespace NMSWiki.WebAPI.Controllers
             return planetResourceService;
         }
         //get all
+        [HttpGet]
         public IHttpActionResult Get()
         {
             PlanetResourceService planetResourceService = CreatePlanetResourceService();
@@ -25,6 +26,7 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok(planetTypes);
         }
         //post
+        [HttpPost]
         public IHttpActionResult Post(PlanetResourceCreate planetResource)
         {
             if (!ModelState.IsValid)
@@ -38,6 +40,7 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //get by id
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             PlanetResourceService planetResourceService = CreatePlanetResourceService();
@@ -46,6 +49,7 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //put
+        [HttpPut]
         public IHttpActionResult Put(PlanetResourceEdit planetResource)
         {
             if (!ModelState.IsValid)
@@ -58,7 +62,7 @@ namespace NMSWiki.WebAPI.Controllers
 
             return Ok();
         }
-
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             var service = CreatePlanetResourceService();

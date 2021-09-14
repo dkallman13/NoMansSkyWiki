@@ -33,7 +33,7 @@ namespace NMSWiki.Services
                         .Craftables
                         .Select(e => new CraftableListItem
                         {
-                            Id = e.Id,
+                            Id = e.CraftableId,
                             Name = e.Name,
                             Ingredients = e.Ingredients
                         }
@@ -49,11 +49,11 @@ namespace NMSWiki.Services
                 var entity =
                     ctx
                         .Craftables
-                        .Single(e => e.Id == id);
+                        .Single(e => e.CraftableId == id);
                     return
                         new CraftableDetail()
                         {
-                            Id = entity.Id,
+                            Id = entity.CraftableId,
                             Name = entity.Name,
                             Ingredients = entity.Ingredients
                         };
@@ -67,7 +67,7 @@ namespace NMSWiki.Services
                 var entity =
                     ctx
                         .Craftables
-                        .Single(e => e.Id == model.Id);
+                        .Single(e => e.CraftableId == model.Id);
 
                 entity.Name = model.Name;
                 entity.Ingredients = model.Ingredients;
@@ -83,7 +83,7 @@ namespace NMSWiki.Services
                 var entity =
                     ctx
                         .Craftables
-                        .Single(e => e.Id == id);
+                        .Single(e => e.CraftableId == id);
 
                 ctx.Craftables.Remove(entity);
 

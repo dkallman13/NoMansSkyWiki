@@ -11,17 +11,15 @@ namespace NMSWiki.Data
     public class Resource
     {
         [Key]
-        public int Id { get; set; }
+        public int ResourceId { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
 
-        [ForeignKey(nameof(PlanetResource))]
-        public List<int> PlanetResourceId { get; set; }
+        public string PlanetResourceId { get; set; }
         public virtual List<PlanetResource> PlanetResources { get; set; }
 
-        [ForeignKey(nameof(Ingredient))]
-        public List<int> IngredientId { get; set; }
+        public string IngredientId { get; set; }
         public virtual List<Ingredient> Ingredients { get; set; }
     }
 }
