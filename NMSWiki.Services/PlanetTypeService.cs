@@ -10,11 +10,7 @@ namespace NMSWiki.Services
 {
     public class PlanetTypeService
     {
-        private readonly int _userId;
-        public PlanetTypeService(int userId)
-        {
-            _userId = userId;
-        }
+        
         //post
         public bool CreatePlanetType(PlanetTypeCreate model)
         {
@@ -35,7 +31,7 @@ namespace NMSWiki.Services
             {
                 var query =
                     ctx.
-                    PlanetTypes.Where(e => e.PlanetTypeId == _userId)
+                    PlanetTypes
                     .Select(
                         e => new PlanetTypeList
                         {
