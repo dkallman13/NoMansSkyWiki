@@ -11,7 +11,7 @@ namespace NMSWiki.Data
     public class Ingredient
     {
         [Key]
-        public int IngredientId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [ForeignKey(nameof(Craftable))]
