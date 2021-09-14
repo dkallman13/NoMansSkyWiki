@@ -33,7 +33,7 @@ namespace NMSWiki.WebAPI.Controllers
         {
             List<CraftableListItem> craftables = await _context.Craftables.Select(c => new CraftableListItem
             {
-                Id = c.Id,
+                Id = c.CraftableId,
                 Name = c.Name
             }).ToListAsync();
 
@@ -48,7 +48,7 @@ namespace NMSWiki.WebAPI.Controllers
             {
                 var craftableDetail = new CraftableDetail()
                 {
-                    Id = craftable.Id,
+                    Id = craftable.CraftableId,
                     Name = craftable.Name,
                     Ingredients = craftable.Ingredients
                 };
