@@ -6,16 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NMSWiki.Data
+namespace NMSWiki.Models
 {
-    public class PlanetResources
+    public class IngredientCreate
     {
-        [Key]
-        public int PlanetResourceId { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Planets))]
-        public int PlanetId { get; set; }
+        [ForeignKey(nameof(Craftables))]
+        public int Id { get; set; }
 
         [Required]
         [ForeignKey(nameof(Resources))]

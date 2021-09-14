@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NMSWiki.Data
 {
-    public class Ingredients
+    public class Ingredient
     {
         [Key]
         public int IngredientId { get; set; }

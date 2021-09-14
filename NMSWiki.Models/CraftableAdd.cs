@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NMSWiki.Data
+namespace NMSWiki.Models
 {
-    public class PlanetTypes
+    public class CraftableAdd
     {
-        [Key]
-        public int PlanetId { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
+        public List<Ingredient> Ingredients { get; set; }
     }
 }

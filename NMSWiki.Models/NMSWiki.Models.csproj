@@ -54,7 +54,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CraftableAdd.cs" />
+    <Compile Include="CraftableDetail.cs" />
+    <Compile Include="CraftableEdit.cs" />
+    <Compile Include="CraftableListItem.cs" />
+    <Compile Include="IngredientCreate.cs" />
+    <Compile Include="IngredientDetail.cs" />
+    <Compile Include="IngredientList.cs" />
+    <Compile Include="PlanetResourceCreate.cs" />
+    <Compile Include="PlanetResourceList.cs" />
+    <Compile Include="PlanetTypeCreate.cs" />
+    <Compile Include="PlanetTypeDetail.cs" />
+    <Compile Include="PlanetTypeList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceCreate.cs" />
+    <Compile Include="ResourceDetail.cs" />
+    <Compile Include="ResourceEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

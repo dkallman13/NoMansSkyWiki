@@ -54,11 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlanetTypeService.cs" />
+    <Compile Include="CraftableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NMSWiki.Data\NMSWiki.Data.csproj">
+      <Project>{bd1df0ef-c240-4c5c-858c-e174856ae31d}</Project>
+      <Name>NMSWiki.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NMSWiki.Models\NMSWiki.Models.csproj">
+      <Project>{a13df230-4d6e-4037-a76b-2dce60d93f40}</Project>
+      <Name>NMSWiki.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
