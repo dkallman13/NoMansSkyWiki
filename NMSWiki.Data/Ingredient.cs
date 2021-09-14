@@ -14,11 +14,11 @@ namespace NMSWiki.Data
         public int IngredientId { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Craftables))]
+        [ForeignKey(nameof(Craftable))]
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Resources))]
+        [ForeignKey(nameof(Resource))]
         public int ResourceId { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace NMSWiki.WebAPI.Controllers
     {
         private PlanetTypeService CreatePlanetTypeService()
         {
-            var planetTypeService = new PlanetTypeService(userId);
+            var planetTypeService = new PlanetTypeService();
             return planetTypeService;
         }
         //get all
