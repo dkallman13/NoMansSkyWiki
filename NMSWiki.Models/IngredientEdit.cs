@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace NMSWiki.Models
 {
-    public class IngredientList
+    public class IngredientEdit
     {
         public int IngredientId { get; set; }
 
         public int CraftableId { get; set; }
-
         public int ResourceId { get; set; }
     }
 }

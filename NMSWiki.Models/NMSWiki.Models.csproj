@@ -60,6 +60,7 @@
     <Compile Include="CraftableListItem.cs" />
     <Compile Include="IngredientCreate.cs" />
     <Compile Include="IngredientDetail.cs" />
+    <Compile Include="IngredientEdit.cs" />
     <Compile Include="IngredientList.cs" />
     <Compile Include="PlanetResourceCreate.cs" />
     <Compile Include="PlanetResourceDetail.cs" />
