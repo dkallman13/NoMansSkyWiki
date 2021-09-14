@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NMSWiki.Data
+namespace NMSWiki.Models
 {
-    public class PlanetType
+    public class PlanetTypeEdit
     {
-        [Key]
         public int PlanetTypeId { get; set; }
-        [Required]
         public string Name { get; set; }
     }
 }

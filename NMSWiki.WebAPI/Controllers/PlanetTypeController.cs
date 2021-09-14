@@ -36,5 +36,37 @@ namespace NMSWiki.WebAPI.Controllers
 
             return Ok();
         }
+
+        //get by id
+        public IHttpActionResult Get(int id)
+        {
+            PlanetTypeService planetTypeService = CreatePlanetTypeService();
+            var planetType = planetTypeService.GetPlanetTypeById(id);
+            return Ok(planetType);
+        }
+
+        //put
+        public IHttpActionResult Put(PlanetTypeEdit planetType)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreatePlanetTypeService();
+
+            if (!service.UpdatePlanetType(planetType))
+                return InternalServerError();
+
+            return Ok();
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreatePlanetTypeService();
+
+            if (!service.DeletePlanetType(id))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
 }

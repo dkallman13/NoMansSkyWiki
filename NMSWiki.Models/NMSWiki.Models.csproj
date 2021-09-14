@@ -64,6 +64,8 @@
     <Compile Include="PlanetResourceDetail.cs" />
     <Compile Include="PlanetResourceList.cs" />
     <Compile Include="PlanetTypeCreate.cs" />
+    <Compile Include="PlanetTypeDetail.cs" />
+    <Compile Include="PlanetTypeEdit.cs" />
     <Compile Include="PlanetTypeList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceCreate.cs" />

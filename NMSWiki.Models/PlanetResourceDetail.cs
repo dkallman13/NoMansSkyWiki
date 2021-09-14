@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace NMSWiki.Models
 {
+
     public class PlanetResourceDetail
     {
         public int PlanetResourceId { get; set; }
