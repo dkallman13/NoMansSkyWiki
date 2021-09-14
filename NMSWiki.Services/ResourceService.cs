@@ -61,6 +61,23 @@ namespace NMSWiki.Services
                 return query.ToArray();
             }
         }
+        public IEnumerable<PlanetType> GetRelatedPlanetTypes(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                List<int> PlanetIds = GetResourceById(id).PlanetResourceId;
+                var query =
+                    ctx
+                        .PlanetTypes
+                        .Where(e => e.PlanetResourceId == PlanetIds)
+                        .SelectMany(
+                            e => ctx.PlanetTypes
+                        );
+
+                return query.ToArray();
+            }
+        }
         public ResourceDetail GetResourceById(int id)
         {
             using (var ctx = new ApplicationDbContext())
