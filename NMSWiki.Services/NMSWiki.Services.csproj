@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CraftableService.cs" />
+    <Compile Include="IngredientService.cs" />
     <Compile Include="PlanetResourceService.cs" />
     <Compile Include="PlanetTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

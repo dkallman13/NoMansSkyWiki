@@ -15,7 +15,7 @@ namespace NMSWiki.Data
 
         [Required]
         [ForeignKey(nameof(Craftable))]
-        public int Id { get; set; }
+        public int CraftableId { get; set; }
 
         [Required]
         [ForeignKey(nameof(Resource))]
