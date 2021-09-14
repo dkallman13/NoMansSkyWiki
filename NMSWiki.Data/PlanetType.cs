@@ -10,7 +10,7 @@ namespace NMSWiki.Data
     public class PlanetType
     {
         [Key]
-        public int PlanetId { get; set; }
+        public int PlanetTypeId { get; set; }
         [Required]
         public string Name { get; set; }
     }

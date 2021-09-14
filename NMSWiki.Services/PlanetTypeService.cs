@@ -10,11 +10,7 @@ namespace NMSWiki.Services
 {
     public class PlanetTypeService
     {
-        private readonly int _userId;
-        public PlanetTypeService(int userId)
-        {
-            _userId = userId;
-        }
+        
         //post
         public bool CreatePlanetType(PlanetTypeCreate model)
         {
@@ -35,17 +31,58 @@ namespace NMSWiki.Services
             {
                 var query =
                     ctx.
-                    PlanetTypes.Where(e => e.PlanetTypeId == _userId)
+                    PlanetTypes
                     .Select(
                         e => new PlanetTypeList
                         {
-                            PlanetId = e.PlanetId,
+                            PlanetTypeId = e.PlanetTypeId,
                             Name = e.Name
                         }
                         );
                 return query.ToArray();
             }
         }
+        //get by id
+        public PlanetTypeDetail GetPlanetTypeById(int id)
+        {
+            using (var ctx=new ApplicationDbContext())
+            {
+                var entity = ctx
+                    .PlanetTypes
+                    .Single(e => e.PlanetTypeId == id);
+                return
+                    new PlanetTypeDetail
+                    {
+                        PlanetTypeId = entity.PlanetTypeId,
+                        Name = entity.Name
+                    };
+            }
+        }
+        //put
+        public bool UpdatePlanetType(PlanetTypeEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.PlanetTypes.Single(e => e.PlanetTypeId == model.PlanetTypeId);
+
+                entity.Name = model.Name;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        //delete
+        public bool DeletePlanetType(int planetTypeId)
+        {
+            using (var ctx=new ApplicationDbContext())
+            {
+                var entity = ctx.PlanetTypes.Single(e => e.PlanetTypeId == planetTypeId);
+
+                ctx.PlanetTypes.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
 
     }
 }

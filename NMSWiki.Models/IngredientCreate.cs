@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NMSWiki.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,11 +13,11 @@ namespace NMSWiki.Models
     {
 
         [Required]
-        [ForeignKey(nameof(Craftables))]
+        [ForeignKey(nameof(Craftable))]
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Resources))]
+        [ForeignKey(nameof(Resource))]
         public int ResourceId { get; set; }
     }
 }

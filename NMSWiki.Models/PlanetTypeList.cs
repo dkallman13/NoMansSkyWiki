@@ -8,7 +8,7 @@ namespace NMSWiki.Models
 {
     public class PlanetTypeList
     {
-        public int PlanetId { get; set; }
+        public int PlanetTypeId { get; set; }
         public string Name { get; set; }
     }
 }
