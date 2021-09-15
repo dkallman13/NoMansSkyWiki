@@ -31,10 +31,19 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok(resources);
         }
         [HttpGet]
-        public IHttpActionResult GetCraftable(int id)
+        [Route("api/Resource/GetCraftable/{ResId:int}")]
+        public IHttpActionResult GetCraftable(int ResId)
         {
             ResourceService resService = CreateResourceService();
-            var craftables = resService.GetRelatedCraftables(id);
+            var craftables = resService.GetRelatedCraftables(ResId);
+            return Ok(craftables);
+        }
+        [HttpGet]
+        [Route("api/Resource/GetPlanetTypes/{ResId:int}")]
+        public IHttpActionResult GetPlanetTypes(int ResId)
+        {
+            ResourceService resService = CreateResourceService();
+            var craftables = resService.GetRelatedPlanetTypes(ResId);
             return Ok(craftables);
         }
         [HttpPost]
