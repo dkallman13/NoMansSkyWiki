@@ -11,5 +11,6 @@ namespace NMSWiki.Models
     {
         [Required]
         public string Name { get; set; }
+        public string PlanetResourceId { get; set; }
     }
 }

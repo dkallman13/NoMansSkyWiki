@@ -10,5 +10,6 @@ namespace NMSWiki.Models
     {
         public int PlanetTypeId { get; set; }
         public string Name { get; set; }
+        public string PlanetResourceId { get; set; }
     }
 }
