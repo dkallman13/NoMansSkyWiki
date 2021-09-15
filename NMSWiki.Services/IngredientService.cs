@@ -35,6 +35,7 @@ namespace NMSWiki.Services
                     .Select(
                         e => new IngredientList
                         {
+                            IngredientId = e.IngredientId,
                             CraftableId = e.CraftableId,
                             ResourceId = e.ResourceId
                         }
@@ -53,6 +54,7 @@ namespace NMSWiki.Services
                 return
                     new IngredientDetail
                     {
+                        IngredientId = entity.IngredientId,
                         CraftableId = entity.CraftableId,
                         ResourceId = entity.ResourceId
                     };
