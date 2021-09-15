@@ -10,15 +10,16 @@ namespace NMSWiki.Services
 {
     public class PlanetTypeService
     {
-        
+
         //post
         public bool CreatePlanetType(PlanetTypeCreate model)
         {
             var entity = new PlanetType()
             {
-                Name = model.Name
+                Name = model.Name,
+                PlanetResourceId = model.PlanetResourceId
             };
-            using (var ctx=new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 ctx.PlanetTypes.Add(entity);
                 return ctx.SaveChanges() == 1;
@@ -36,7 +37,8 @@ namespace NMSWiki.Services
                         e => new PlanetTypeList
                         {
                             PlanetTypeId = e.PlanetTypeId,
-                            Name = e.Name
+                            Name = e.Name,
+                            PlanetResourceId = e.PlanetResourceId
                         }
                         );
                 return query.ToArray();
@@ -45,7 +47,7 @@ namespace NMSWiki.Services
         //get by id
         public PlanetTypeDetail GetPlanetTypeById(int id)
         {
-            using (var ctx=new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx
                     .PlanetTypes
@@ -54,18 +56,20 @@ namespace NMSWiki.Services
                     new PlanetTypeDetail
                     {
                         PlanetTypeId = entity.PlanetTypeId,
-                        Name = entity.Name
+                        Name = entity.Name,
+                        PlanetResourceId = entity.PlanetResourceId
                     };
             }
         }
         //put
         public bool UpdatePlanetType(PlanetTypeEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.PlanetTypes.Single(e => e.PlanetTypeId == model.PlanetTypeId);
 
                 entity.Name = model.Name;
+                entity.PlanetResourceId = model.PlanetResourceId;
 
                 return ctx.SaveChanges() == 1;
             }
@@ -73,7 +77,7 @@ namespace NMSWiki.Services
         //delete
         public bool DeletePlanetType(int planetTypeId)
         {
-            using (var ctx=new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.PlanetTypes.Single(e => e.PlanetTypeId == planetTypeId);
 

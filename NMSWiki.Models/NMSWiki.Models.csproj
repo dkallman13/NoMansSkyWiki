@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NMSWiki.Data\NMSWiki.Data.csproj">
-      <Project>{BD1DF0EF-C240-4C5C-858C-E174856AE31D}</Project>
+      <Project>{bd1df0ef-c240-4c5c-858c-e174856ae31d}</Project>
       <Name>NMSWiki.Data</Name>
     </ProjectReference>
   </ItemGroup>

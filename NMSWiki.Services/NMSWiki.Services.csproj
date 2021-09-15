@@ -54,10 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CraftableService.cs" />
     <Compile Include="IngredientService.cs" />
     <Compile Include="PlanetResourceService.cs" />
     <Compile Include="PlanetTypeService.cs" />
-    <Compile Include="CraftableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceService.cs" />
   </ItemGroup>
