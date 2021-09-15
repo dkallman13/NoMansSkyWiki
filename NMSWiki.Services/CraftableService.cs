@@ -15,8 +15,7 @@ namespace NMSWiki.Services
             var entity =
                 new Craftable()
                 {
-                    Name = model.Name,
-                    Ingredients = model.Ingredients
+                    Name = model.Name
                 };
             using (var ctx = new ApplicationDbContext())
             {

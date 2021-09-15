@@ -13,7 +13,7 @@ namespace NMSWiki.Data
         [Key]
         public int CraftableId { get; set; }
         public string Name { get; set; }
-        public virtual int[] IngredientId { get; set; }
+        public string IngredientId { get; set; }
         public virtual List<Ingredient> Ingredients { get; set; }
 
     }
