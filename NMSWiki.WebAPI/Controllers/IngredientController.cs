@@ -9,10 +9,8 @@ using System.Web.Http;
 
 namespace NMSWiki.WebAPI.Controllers
 {
-    public class IngredientController : ApiController
-    {
         [Authorize]
-        public class PlanetResourceController : ApiController
+        public class IngredientController : ApiController
         {
             private IngredientService CreateIngredientService()
             {
@@ -71,5 +69,4 @@ namespace NMSWiki.WebAPI.Controllers
                 return Ok();
             }
         }
-    }
 }
