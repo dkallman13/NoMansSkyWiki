@@ -15,8 +15,7 @@ namespace NMSWiki.Data
         [Required]
         public string Name { get; set; }
 
-        [ForeignKey(nameof(PlanetResource))]
-        public List<int> PlanetResourceId { get; set; }
+        public int[] PlanetResourceId { get; set; }
 
         public virtual List<PlanetResource> PlanetResources { get; set; }
 

@@ -14,11 +14,9 @@ namespace NMSWiki.Data
         public int PlanetResourceId { get; set; }
 
         [Required]
-        [ForeignKey(nameof(PlanetType))]
-        public int PlanetTypeId { get; set; }
+        public virtual int PlanetTypeId { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Resource))]
-        public int ResourceId { get; set; }
+        public virtual int ResourceId { get; set; }
     }
 }

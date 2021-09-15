@@ -35,6 +35,7 @@ namespace NMSWiki.Services
                     .Select(
                         e => new IngredientList
                         {
+                            IngredientId = e.IngredientId,
                             CraftableId = e.CraftableId,
                             ResourceId = e.ResourceId
                         }
@@ -49,10 +50,11 @@ namespace NMSWiki.Services
             {
                 var entity = ctx
                     .Ingredients
-                    .Single(e => e.Id == id);
+                    .Single(e => e.IngredientId == id);
                 return
                     new IngredientDetail
                     {
+                        IngredientId = entity.IngredientId,
                         CraftableId = entity.CraftableId,
                         ResourceId = entity.ResourceId
                     };
@@ -63,7 +65,7 @@ namespace NMSWiki.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Ingredients.Single(e => e.Id == model.IngredientId);
+                var entity = ctx.Ingredients.Single(e => e.IngredientId == model.IngredientId);
 
                 entity.CraftableId = model.CraftableId;
                 entity.ResourceId = model.ResourceId;
@@ -76,7 +78,7 @@ namespace NMSWiki.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Ingredients.Single(e => e.Id == ingredientId);
+                var entity = ctx.Ingredients.Single(e => e.IngredientId == ingredientId);
 
                 ctx.Ingredients.Remove(entity);
 

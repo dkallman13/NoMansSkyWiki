@@ -11,7 +11,7 @@ namespace NMSWiki.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
-        public List<int> PlanetResourceId { get; set; }
-        public List<int> IngredientId { get; set; }
+        public string PlanetResourceId { get; set; }
+        public string IngredientId { get; set; }
     }
 }
