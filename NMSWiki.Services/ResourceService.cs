@@ -73,20 +73,31 @@ namespace NMSWiki.Services
             {
 
                 string[] PlanetIdsString = GetResourceById(id).PlanetResourceId.Split(',');
-                int[] PlanetIds = { };
-                foreach (string planettypeid in PlanetIdsString)
+                List<string> planetidsfetched = new List<string>();
+                for (int i = 0; i < PlanetIdsString.Length; i++)
                 {
-                    PlanetIds.Append(Int32.Parse(planettypeid));
+                    PlanetResourceService source = new PlanetResourceService();
+                    int planetIdInt = int.Parse(PlanetIdsString[i]);
+                    int query2 = ctx.PlanetResources
+                    .Where(e => e.PlanetResourceId == planetIdInt)
+                    .First().PlanetTypeId;
+                    planetidsfetched.Add($"{query2}");
                 }
-                var query =
+                List<PlanetType> planetTypes = new List<PlanetType>();
+                foreach (string planetid in planetidsfetched)
+                {
+                    int planetIdInt = int.Parse(planetid);
+                    var query =
                     ctx
-                        .PlanetTypes
-                        .Where(e => e.PlanetResourceId == PlanetIds)
+                        .PlanetResources
+                        .Where(e => e.PlanetResourceId == planetIdInt)
                         .SelectMany(
                             e => ctx.PlanetTypes
                         );
+                    planetTypes.AddRange(query);
+                }
 
-                return query.ToArray();
+                return planetTypes.ToArray();
             }
         }
         public ResourceDetail GetResourceById(int id)
@@ -103,7 +114,7 @@ namespace NMSWiki.Services
                         Id = entity.ResourceId,
                         Name = entity.Name,
                         Desc = entity.Description,
-                        IngredientId  = entity.IngredientId,
+                        IngredientId = entity.IngredientId,
                         PlanetResourceId = entity.PlanetResourceId
                     };
             }
