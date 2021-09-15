@@ -54,15 +54,11 @@ namespace NMSWiki.Services
             {
 
                 string[] PlanetIdsString = GetResourceById(id).PlanetResourceId.Split(',');
-                int[] ingredientids = { };
-                foreach (string planettypeid in PlanetIdsString)
-                {
-                    ingredientids.Append(Int32.Parse(planettypeid));
-                }
+
                 var query =
                     ctx
                         .Craftables
-                        .Where(e => e.IngredientId == ingredientids)
+                        .Where(e => e.IngredientId.Split(',') == PlanetIdsString)
                         .SelectMany(
                             e => ctx.Craftables
                         );
