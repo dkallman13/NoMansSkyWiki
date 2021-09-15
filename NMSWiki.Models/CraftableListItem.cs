@@ -11,6 +11,6 @@ namespace NMSWiki.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual List<Ingredient> Ingredients { get; set; }
+        public string IngredientId { get; set; }
     }
 }
