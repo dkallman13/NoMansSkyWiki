@@ -14,15 +14,21 @@ namespace NMSWiki.WebAPI.Controllers
 {
     public class CraftableController : ApiController
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
-
+        private CraftableService CreateCraftableService()
+        {
+            var craftableService = new CraftableService();
+            return craftableService;
+        }
         [HttpPost]
-        public async Task<IHttpActionResult> PostCraftable(Craftable craftable)
+        public async Task<IHttpActionResult> PostCraftable(CraftableAdd craftable)
         {
             if (ModelState.IsValid)
             {
-                _context.Craftables.Add(craftable);
-                await _context.SaveChangesAsync();
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                CraftableService cservice = CreateCraftableService();
+                if (!cservice.CreateCraftable(craftable))
+                    return InternalServerError();
                 return Ok();
             }
             return BadRequest(ModelState);
@@ -31,68 +37,46 @@ namespace NMSWiki.WebAPI.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetCraftables()
         {
-            List<CraftableListItem> craftables = await _context.Craftables.Select(c => new CraftableListItem
-            {
-                Id = c.CraftableId,
-                Name = c.Name
-            }).ToListAsync();
-
+            CraftableService cservice = CreateCraftableService();
+            var craftables = cservice.GetCraftable();
             return Ok(craftables);
         }
 
         [HttpGet]
         public async Task<IHttpActionResult> GetCraftableById(int id)
         {
-            Craftable craftable = await _context.Craftables.FindAsync(id);
+
+            CraftableService cservice = CreateCraftableService();
+            var craftable = cservice.GetCraftableById(id);
             if (craftable != null)
             {
-                var craftableDetail = new CraftableDetail()
-                {
-                    Id = craftable.CraftableId,
-                    Name = craftable.Name,
-                    Ingredients = craftable.Ingredients
-                };
-                return Ok(craftableDetail);
+                return Ok(craftable);
             }
             return NotFound();
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> UpdateCraftable([FromUri] int id, [FromBody] CraftableEdit craftableEdit)
+        public async Task<IHttpActionResult> UpdateCraftable(CraftableEdit craftableEdit)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            Craftable craftable = await _context.Craftables.FindAsync(id);
+            var service = CreateCraftableService();
+            if (!service.UpdateCraftable(craftableEdit))
+                return InternalServerError();
 
-            if (craftable == null)
-            {
-                return NotFound();
-            }
-
-            craftable.Name = craftableEdit.Name;
-            craftable.Ingredients = craftableEdit.Ingredients;
-
-            await _context.SaveChangesAsync();
 
             return Ok();
         }
 
         [HttpDelete]
-        public async Task<IHttpActionResult> DeleteCraftable([FromUri] int id)
+        public IHttpActionResult Delete(int id)
         {
-            Craftable craftable = await _context.Craftables.FindAsync(id);
-            
-            if (craftable == null)
-            {
-                return NotFound();
-            }
+            var service = CreateCraftableService();
 
-            _context.Craftables.Remove(craftable);
+            if (!service.DeleteCraftable(id))
+                return InternalServerError();
 
-            await _context.SaveChangesAsync();
             return Ok();
         }
     }

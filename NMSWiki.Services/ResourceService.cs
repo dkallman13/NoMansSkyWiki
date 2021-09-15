@@ -53,17 +53,32 @@ namespace NMSWiki.Services
             using (var ctx = new ApplicationDbContext())
             {
 
-                string[] PlanetIdsString = GetResourceById(id).PlanetResourceId.Split(',');
-
-                var query =
+                string[] IngredientIds = GetResourceById(id).IngredientId.Split(',');
+                List<string> IngredientIdsFetched = new List<string>();
+                for (int i = 0; i < IngredientIds.Length; i++)
+                {
+                    PlanetResourceService source = new PlanetResourceService();
+                    int IngredientIdInt = int.Parse(IngredientIds[i]);
+                    int query2 = ctx.Ingredients
+                    .Where(e => e.IngredientId == IngredientIdInt)
+                    .First().CraftableId;
+                    IngredientIdsFetched.Add($"{query2}");
+                }
+                List<Craftable> craftables = new List<Craftable>();
+                foreach (string craftableid in IngredientIdsFetched)
+                {
+                    int craftableIdInt = int.Parse(craftableid);
+                    var query =
                     ctx
-                        .Craftables
-                        .Where(e => e.IngredientId.Split(',') == PlanetIdsString)
+                        .Ingredients
+                        .Where(e => e.CraftableId == craftableIdInt)
                         .SelectMany(
                             e => ctx.Craftables
                         );
+                    craftables.AddRange(query);
+                }
 
-                return query.ToArray();
+                return craftables.ToArray();
             }
         }
 

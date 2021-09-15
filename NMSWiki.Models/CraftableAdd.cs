@@ -12,6 +12,7 @@ namespace NMSWiki.Models
     {
         [Required]
         public string Name { get; set; }
+        public string IngredientId { get; set; }
 
     }
 }

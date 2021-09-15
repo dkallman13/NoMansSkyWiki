@@ -15,7 +15,8 @@ namespace NMSWiki.Services
             var entity =
                 new Craftable()
                 {
-                    Name = model.Name
+                    Name = model.Name,
+                    IngredientId = model.IngredientId
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -34,7 +35,7 @@ namespace NMSWiki.Services
                         {
                             Id = e.CraftableId,
                             Name = e.Name,
-                            Ingredients = e.Ingredients
+                            IngredientId = e.IngredientId
                         }
                     );
                 return query.ToArray();
@@ -54,7 +55,7 @@ namespace NMSWiki.Services
                         {
                             Id = entity.CraftableId,
                             Name = entity.Name,
-                            Ingredients = entity.Ingredients
+                            IngredientId = entity.IngredientId
                         };
             }
         }
