@@ -20,7 +20,7 @@ namespace NMSWiki.WebAPI.Controllers
             return craftableService;
         }
         [HttpPost]
-        public async Task<IHttpActionResult> PostCraftable(CraftableAdd craftable)
+        public IHttpActionResult PostCraftable(CraftableAdd craftable)
         {
             if (ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetCraftables()
+        public IHttpActionResult GetCraftables()
         {
             CraftableService cservice = CreateCraftableService();
             var craftables = cservice.GetCraftable();
@@ -43,7 +43,7 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetCraftableById(int id)
+        public IHttpActionResult GetCraftableById(int id)
         {
 
             CraftableService cservice = CreateCraftableService();
@@ -56,7 +56,7 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> UpdateCraftable(CraftableEdit craftableEdit)
+        public IHttpActionResult UpdateCraftable(CraftableEdit craftableEdit)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
