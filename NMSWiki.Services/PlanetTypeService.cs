@@ -36,7 +36,8 @@ namespace NMSWiki.Services
                         e => new PlanetTypeList
                         {
                             PlanetTypeId = e.PlanetTypeId,
-                            Name = e.Name
+                            Name = e.Name,
+                            PlanetResourceId = e.PlanetResourceId
                         }
                         );
                 return query.ToArray();
@@ -54,7 +55,8 @@ namespace NMSWiki.Services
                     new PlanetTypeDetail
                     {
                         PlanetTypeId = entity.PlanetTypeId,
-                        Name = entity.Name
+                        Name = entity.Name,
+                        PlanetResourceId = entity.PlanetResourceId
                     };
             }
         }
@@ -66,6 +68,7 @@ namespace NMSWiki.Services
                 var entity = ctx.PlanetTypes.Single(e => e.PlanetTypeId == model.PlanetTypeId);
 
                 entity.Name = model.Name;
+                entity.PlanetResourceId = model.PlanetResourceId;
 
                 return ctx.SaveChanges() == 1;
             }
