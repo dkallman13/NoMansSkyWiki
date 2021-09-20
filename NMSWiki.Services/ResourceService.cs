@@ -59,10 +59,14 @@ namespace NMSWiki.Services
                 {
                     PlanetResourceService source = new PlanetResourceService();
                     int IngredientIdInt = int.Parse(IngredientIds[i]);
-                    int query2 = ctx.Ingredients
-                    .Where(e => e.IngredientId == IngredientIdInt)
-                    .First().CraftableId;
-                    IngredientIdsFetched.Add($"{query2}");
+                    IngredientService iserve = new IngredientService();
+                    Ingredient ingredient = new Ingredient();
+                    ingredient.IngredientId = iserve.GetIngredientById(IngredientIdInt).IngredientId;
+                    ingredient.ResourceId = iserve.GetIngredientById(IngredientIdInt).ResourceId;
+                    ingredient.CraftableId = iserve.GetIngredientById(IngredientIdInt).CraftableId;
+                    var query2 = ctx.Ingredients
+                        .Join(ctx.Resources, x => ingredient.IngredientId, e =>IngredientIdInt, (x, e) => new IngredientResourceLookup { resource = e, ingredient = x }).Where(xe => xe.resource.IngredientId ==xe.ingredient.IngredientId.ToString());
+                    IngredientIdsFetched.Add($"{query2.First().ingredient.IngredientId}");
                 }
                 List<Craftable> craftables = new List<Craftable>();
                 foreach (string craftableid in IngredientIdsFetched)
@@ -70,15 +74,12 @@ namespace NMSWiki.Services
                     int craftableIdInt = int.Parse(craftableid);
                     var query =
                     ctx
-                        .Ingredients
-                        .Where(e => e.CraftableId == craftableIdInt)
-                        .SelectMany(
-                            e => ctx.Craftables
-                        );
-                    craftables.AddRange(query);
+                        .Craftables
+                        .Join(ctx.Ingredients, x =>x.IngredientId, e => craftableid, (x, e) => new CraftableIngredientLookup { craftable = x, ingredient = e }).Where(xe => xe.craftable.IngredientId == xe.ingredient.IngredientId.ToString());
+                    craftables.Add(new Craftable() { CraftableId =  query.First().craftable.CraftableId, IngredientId = query.First().craftable.IngredientId, Name = query.First().craftable.Name });
                 }
 
-                return craftables.ToArray();
+                return craftables;
             }
         }
 
