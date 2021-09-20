@@ -43,6 +43,16 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("api/Craftable/GetResource/{id:int}")]
+        public IHttpActionResult GetRelatedResource(int id)
+        {
+            CraftableService cservice = CreateCraftableService();
+            var resources = cservice.GetRelatedResource(id);
+            if (resources != null)
+                return Ok(resources);
+            return NotFound();
+        }
+        [HttpGet]
         public IHttpActionResult GetCraftableById(int id)
         {
 
