@@ -50,13 +50,64 @@ namespace NMSWiki.Services
                     ctx
                         .Craftables
                         .Single(e => e.CraftableId == id);
-                    return
-                        new CraftableDetail()
+                return
+                    new CraftableDetail()
+                    {
+                        Id = entity.CraftableId,
+                        Name = entity.Name,
+                        IngredientId = entity.IngredientId
+                    };
+            }
+        }
+
+        public IEnumerable<Resource> GetRelatedResource(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                string[] IngredientIds = GetCraftableById(id).IngredientId.Split(',');
+                List<string> IngredientIdsFetched = new List<string>();
+                for (int i = 0; i < IngredientIds.Length; i++)
+                {
+                    int IngredientIdInt = int.Parse(IngredientIds[i]);
+                    IngredientService iserve = new IngredientService();
+                    Ingredient ingredient = new Ingredient();
+                    ingredient.IngredientId = iserve.GetIngredientById(IngredientIdInt).IngredientId;
+                    ingredient.ResourceId = iserve.GetIngredientById(IngredientIdInt).ResourceId;
+                    ingredient.CraftableId = iserve.GetIngredientById(IngredientIdInt).CraftableId;
+                    var query2 = ctx.Ingredients
+                        .Join(ctx.Craftables, x => ingredient.IngredientId, e => IngredientIdInt, (x, e) => new CraftableIngredientLookup { craftable = e, ingredient = x }).Where(xe => xe.craftable.IngredientId == xe.ingredient.IngredientId.ToString());
+                    IngredientIdsFetched.Add($"{query2.First().ingredient.IngredientId}");
+                }
+                List<Resource> resource = new List<Resource>();
+                foreach (string resourceId in IngredientIdsFetched)
+                {
+                    var ids3 = ctx.Resources.Select(y => y.IngredientId);
+                    foreach (string idset in ids3)
+                    {
+                        string[] idarray = idset.Split(',');
+                        List<IngredientResourceLookup> idsarray = new List<IngredientResourceLookup>();
+                        foreach (string individualId in idarray)
                         {
-                            Id = entity.CraftableId,
-                            Name = entity.Name,
-                            IngredientId = entity.IngredientId
-                        };
+                            var ids = ctx.Resources
+                            .Join(ctx.Ingredients, x => individualId, e => e.IngredientId.ToString(), (x, e) => new IngredientResourceLookup { resource = x, ingredient = e }).ToList();
+                            var ids2 = ids
+                                .Where(xe => xe.resource.IngredientId
+                                .Select(y => xe.resource.IngredientId.Split(','))
+                                .Any(y => y.Contains(resourceId)))
+                                .ToArray();
+                            idsarray.Add(ids2.First());
+                        }
+                        foreach (IngredientResourceLookup lookup in idsarray)
+                        {
+                            resource.Add(new Resource() { ResourceId = lookup.resource.ResourceId, IngredientId = lookup.resource.IngredientId, Name = lookup.resource.Name, PlanetResourceId = lookup.resource.PlanetResourceId, Description = lookup.resource.Description });
+                        }
+
+                    }
+
+                }
+                return resource;
+
             }
         }
 
