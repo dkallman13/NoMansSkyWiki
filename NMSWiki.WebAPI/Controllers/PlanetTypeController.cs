@@ -24,6 +24,14 @@ namespace NMSWiki.WebAPI.Controllers
             var planetTypes = planetTypeService.GetPlanetTypes();
             return Ok(planetTypes);
         }
+        [HttpGet]
+        [Route("api/PlanetType/GetResource/{ResId:int}")]
+        public IHttpActionResult GetCraftable(int ResId)
+        {
+            PlanetTypeService ptService = CreatePlanetTypeService();
+            var resources = ptService.GetRelatedResource(ResId);
+            return Ok(resources);
+        }
         //post
         public IHttpActionResult Post(PlanetTypeCreate planetType)
         {
