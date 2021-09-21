@@ -18,12 +18,24 @@ namespace NMSWiki.WebAPI.Controllers
             return planetTypeService;
         }
         //get all
+        /// <summary>
+        /// Gets all planet types with their Ids, names and Ids of resources found in each planet.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         public IHttpActionResult Get()
         {
             PlanetTypeService planetTypeService = CreatePlanetTypeService();
             var planetTypes = planetTypeService.GetPlanetTypes();
             return Ok(planetTypes);
         }
+        /// <summary>
+        /// Gets Resources related to a particular planet.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/PlanetType/GetResource/{ResId:int}")]
         public IHttpActionResult GetCraftable(int ResId)
@@ -33,6 +45,22 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok(resources);
         }
         //post
+        /// <summary>
+        /// Posts a planet type and its parameters contain a planettyepId,name and ResourceId.
+        /// </summary>
+        ///     /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /PlanetType/post
+        ///     {
+        ///        "PlanetTypeId":1,
+        ///        "Name":"Lush",
+        ///        "ResourceId":1
+        ///     }
+        /// </remarks>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         public IHttpActionResult Post(PlanetTypeCreate planetType)
         {
             if (!ModelState.IsValid)
@@ -46,6 +74,12 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //get by id
+        /// <summary>
+        /// Gets a planetType and it contains planettyepId,name and ResourceId by Id.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
             PlanetTypeService planetTypeService = CreatePlanetTypeService();
@@ -54,6 +88,22 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //put
+        /// <summary>
+        /// It updates a planet type.
+        /// </summary>
+        ///     /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /PlanetType/put
+        ///     {
+        ///        "PlanetTypeId":1,
+        ///        "Name":"Lush",
+        ///        "ResourceId":1
+        ///     }
+        /// </remarks>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         public IHttpActionResult Put(PlanetTypeEdit planetType)
         {
             if (!ModelState.IsValid)
@@ -67,6 +117,12 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// It deletes a a planet type.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         public IHttpActionResult Delete(int id)
         {
             var service = CreatePlanetTypeService();

@@ -18,6 +18,12 @@ namespace NMSWiki.WebAPI.Controllers
             return planetResourceService;
         }
         //get all
+        /// <summary>
+        /// Gets all PlanetResources each of which contains an Id, PlanetTypeId and ResourceId.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -26,6 +32,21 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok(planetTypes);
         }
         //post
+        /// <summary>
+        /// Posts a PlanetResource by Id, and it includes PlanetResourceID, PlanetTypeId and ResourceId.
+        /// </summary>
+        ///         /// Sample request:
+        ///
+        ///     POST /PlanetResource/post
+        ///     {
+        ///        "PlanetResourceId":1,
+        ///        "PlanetTypeId":1,
+        ///        "ResourceId":1
+        ///     }
+        /// </remarks>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post(PlanetResourceCreate planetResource)
         {
@@ -40,6 +61,12 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //get by id
+        /// <summary>
+        /// Gets a PlanetResource which contains an Id, PlanetTypeId and ResourceId by id.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -49,6 +76,12 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //put
+        /// <summary>
+        /// Updates body parameters of PlanetResource by ID.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         [HttpPut]
         public IHttpActionResult Put(PlanetResourceEdit planetResource)
         {
@@ -62,6 +95,12 @@ namespace NMSWiki.WebAPI.Controllers
 
             return Ok();
         }
+        /// <summary>
+        /// Deletes PlanetResource by Id.
+        /// </summary>
+        /// <response code="200">Successful call</response>
+        /// <response code="500">Internal error</response>
+        /// <returns></returns>
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
