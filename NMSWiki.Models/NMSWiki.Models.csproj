@@ -54,11 +54,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CraftableAdd.cs" />
+    <Compile Include="CraftableDetail.cs" />
+    <Compile Include="CraftableEdit.cs" />
+    <Compile Include="CraftableIngredientLookup.cs" />
+    <Compile Include="CraftableListItem.cs" />
+    <Compile Include="IngredientCreate.cs" />
+    <Compile Include="IngredientDetail.cs" />
+    <Compile Include="IngredientEdit.cs" />
+    <Compile Include="IngredientList.cs" />
+    <Compile Include="IngredientResourceLookup.cs" />
+    <Compile Include="PlanetResourceCreate.cs" />
+    <Compile Include="PlanetResourceDetail.cs" />
+    <Compile Include="PlanetResourceEdit.cs" />
+    <Compile Include="PlanetResourceList.cs" />
+    <Compile Include="PlanetResourceLookup.cs" />
+    <Compile Include="PlanetTypeCreate.cs" />
+    <Compile Include="PlanetTypeDetail.cs" />
+    <Compile Include="PlanetTypeEdit.cs" />
+    <Compile Include="PlanetTypeList.cs" />
+    <Compile Include="PlanetTypesPlanetResourceLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceCreate.cs" />
+    <Compile Include="ResourceDetail.cs" />
+    <Compile Include="ResourceEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NMSWiki.Data\NMSWiki.Data.csproj">
+      <Project>{bd1df0ef-c240-4c5c-858c-e174856ae31d}</Project>
+      <Name>NMSWiki.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
