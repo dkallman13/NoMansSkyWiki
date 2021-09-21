@@ -61,6 +61,56 @@ namespace NMSWiki.Services
                     };
             }
         }
+        public IEnumerable<Resource> GetRelatedResource(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                string[] PlanetResourceIds = GetPlanetTypeById(id).PlanetResourceId.Split(',');
+                List<string> planetResourceIdsFetched = new List<string>();
+                for (int i = 0; i < PlanetResourceIds.Length; i++)
+                {
+                    int PlanetResourceIdInt = int.Parse(PlanetResourceIds[i]);
+                    PlanetResourceService Service = new PlanetResourceService();
+                    PlanetResource Planetresource = new PlanetResource();
+                    Planetresource.PlanetResourceId = Service.GetPlanetResourceById(PlanetResourceIdInt).PlanetResourceId;
+                    Planetresource.ResourceId = Service.GetPlanetResourceById(PlanetResourceIdInt).ResourceId;
+                    Planetresource.PlanetTypeId = Service.GetPlanetResourceById(PlanetResourceIdInt).PlanetTypeId;
+                    var query2 = ctx.PlanetResources
+                        .Join(ctx.PlanetTypes, x => Planetresource.PlanetResourceId, e => PlanetResourceIdInt, (x, e) => new PlanetTypesPlanetResourceLookup { planetType = e, planetResource = x }).Where(xe => xe.planetType.PlanetResourceId == xe.planetResource.PlanetResourceId.ToString());
+                    planetResourceIdsFetched.Add($"{query2.First().planetResource.PlanetResourceId}");
+                }
+                List<Resource> resource = new List<Resource>();
+                foreach (string resourceId in planetResourceIdsFetched)
+                {
+                    var ids3 = ctx.Resources.Select(y => y.PlanetResourceId);
+                    foreach (string idset in ids3)
+                    {
+                        string[] idarray = idset.Split(',');
+                        List<PlanetResourceLookup> idsarray = new List<PlanetResourceLookup>();
+                        foreach (string individualId in idarray)
+                        {
+                            if (resourceId == individualId)
+                            {
+                                var ids = ctx.Resources
+                                .Join(ctx.PlanetResources, x => individualId, e => e.PlanetResourceId.ToString(), (x, e) => new PlanetResourceLookup { resource = x, planetResource = e }).ToList();
+                                var ids2 = ids
+                                    .Where(xe => xe.resource.PlanetResourceId
+                                    .Select(y => xe.resource.PlanetResourceId.Split(','))
+                                    .Any(y => y.Contains(resourceId)))
+                                    .ToArray();
+                                idsarray.Add(ids2.First());
+                            }
+                        }
+                        foreach (PlanetResourceLookup lookup in idsarray)
+                        {
+                            resource.Add(new Resource() { ResourceId = lookup.resource.ResourceId, IngredientId = lookup.resource.IngredientId, Name = lookup.resource.Name, PlanetResourceId = lookup.resource.PlanetResourceId, Description = lookup.resource.Description });
+                        }
+                    }
+                }
+                return resource;
+            }
+        }
         //put
         public bool UpdatePlanetType(PlanetTypeEdit model)
         {
