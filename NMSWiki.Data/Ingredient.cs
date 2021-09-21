@@ -11,7 +11,7 @@ namespace NMSWiki.Data
     public class Ingredient
     {
         [Key]
-        public int PlanetResourceId { get; set; }
+        public int IngredientId { get; set; }
 
         [Required]
         public virtual int CraftableId { get; set; }

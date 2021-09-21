@@ -72,12 +72,13 @@ namespace NMSWiki.Services
                     int IngredientIdInt = int.Parse(IngredientIds[i]);
                     IngredientService iserve = new IngredientService();
                     Ingredient ingredient = new Ingredient();
-                    ingredient.PlanetResourceId = iserve.GetIngredientById(IngredientIdInt).IngredientId;
+                    ingredient.IngredientId = iserve.GetIngredientById(IngredientIdInt).IngredientId;
                     ingredient.ResourceId = iserve.GetIngredientById(IngredientIdInt).ResourceId;
                     ingredient.CraftableId = iserve.GetIngredientById(IngredientIdInt).CraftableId;
                     var query2 = ctx.Ingredients
-                        .Join(ctx.Craftables, x => ingredient.PlanetResourceId, e => IngredientIdInt, (x, e) => new CraftableIngredientLookup { craftable = e, ingredient = x }).Where(xe => xe.craftable.IngredientId == xe.ingredient.PlanetResourceId.ToString());
-                    IngredientIdsFetched.Add($"{query2.First().ingredient.PlanetResourceId}");
+                        .Join(ctx.Craftables, e => ingredient.IngredientId, x => IngredientIdInt, (e, x) => new CraftableIngredientLookup { craftable = x, ingredient = e })
+                        .Where(xe => IngredientIdInt == xe.ingredient.IngredientId);
+                    IngredientIdsFetched.Add($"{query2.First().ingredient.IngredientId}");
                 }
                 List<Resource> resource = new List<Resource>();
                 foreach (string resourceId in IngredientIdsFetched)
@@ -92,7 +93,7 @@ namespace NMSWiki.Services
                             if (resourceId == individualId)
                             {
                                 var ids = ctx.Resources
-                                .Join(ctx.Ingredients, x => individualId, e => e.PlanetResourceId.ToString(), (x, e) => new IngredientResourceLookup { resource = x, ingredient = e }).ToList();
+                                .Join(ctx.Ingredients, x => individualId, e => e.IngredientId.ToString(), (x, e) => new IngredientResourceLookup { resource = x, ingredient = e }).ToList();
                                 var ids2 = ids
                                     .Where(xe => xe.resource.IngredientId
                                     .Select(y => xe.resource.IngredientId.Split(','))
