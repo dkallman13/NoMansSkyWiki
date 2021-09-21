@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace NMSWiki.WebAPI.Controllers
 {
+    
     public class ResourceController : ApiController
     {
         private ResourceService CreateResourceService()
@@ -16,6 +17,10 @@ namespace NMSWiki.WebAPI.Controllers
             var resourceService = new ResourceService();
             return resourceService;
         }
+
+        /// <summary>
+        /// gets all the resources
+        /// </summary>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -23,6 +28,12 @@ namespace NMSWiki.WebAPI.Controllers
             var  resources= resService.GetResources();
             return Ok(resources);
         }
+        /// <summary>
+        /// gets a single resource when you input the id
+        /// </summary>
+        /// <param name="id">
+        /// this is the ID 
+        /// </param>
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {
@@ -30,6 +41,10 @@ namespace NMSWiki.WebAPI.Controllers
             var resources = resService.GetResourceById(id);
             return Ok(resources);
         }
+        /// <summary>
+        /// gets all the craftables that can be made with the resource, specified by the id
+        /// </summary>
+        /// <param name="ResId">the id of the resource that you are getting all the linked recipies</param>
         [HttpGet]
         [Route("api/Resource/GetCraftable/{ResId:int}")]
         public IHttpActionResult GetCraftable(int ResId)
@@ -38,6 +53,10 @@ namespace NMSWiki.WebAPI.Controllers
             var craftables = resService.GetRelatedCraftables(ResId);
             return Ok(craftables);
         }
+        /// <summary>
+        /// the same as getcraftable but for planettypes
+        /// </summary>
+        /// <param name="ResId">the id of the resource that you are getting all the linked planets where they are found</param>
         [HttpGet]
         [Route("api/Resource/GetPlanetTypes/{ResId:int}")]
         public IHttpActionResult GetPlanetTypes(int ResId)
@@ -46,6 +65,10 @@ namespace NMSWiki.WebAPI.Controllers
             var craftables = resService.GetRelatedPlanetTypes(ResId);
             return Ok(craftables);
         }
+        /// <summary>
+        /// adds a resource to the database
+        /// </summary>
+        /// <param name="resource">the object of what you are adding</param>
         [HttpPost]
         public IHttpActionResult Post(ResourceCreate resource)
         {
@@ -57,6 +80,10 @@ namespace NMSWiki.WebAPI.Controllers
 
             return Ok();
         }
+        /// <summary>
+        /// updates a Resource
+        /// </summary>
+        /// <param name="resource">the object of what you are updating</param>
         [HttpPut]
         public IHttpActionResult Put(ResourceEdit resource)
         {

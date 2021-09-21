@@ -19,6 +19,12 @@ namespace NMSWiki.WebAPI.Controllers
             var craftableService = new CraftableService();
             return craftableService;
         }
+
+        /// <summary>
+        /// Create a craftable using a name and assigned ingredient IDs
+        /// </summary>
+        /// <param name="craftable"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult PostCraftable(CraftableAdd craftable)
         {
@@ -34,6 +40,10 @@ namespace NMSWiki.WebAPI.Controllers
             return BadRequest(ModelState);
         }
 
+        /// <summary>
+        /// Gets a list of all craftables, requires no parameters
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult GetCraftables()
         {
@@ -42,6 +52,11 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok(craftables);
         }
 
+        /// <summary>
+        /// Retrieves resources related to the craftable, requires a craftable ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/Craftable/GetResource/{id:int}")]
         public IHttpActionResult GetRelatedResource(int id)
@@ -52,6 +67,12 @@ namespace NMSWiki.WebAPI.Controllers
                 return Ok(resources);
             return NotFound();
         }
+
+        /// <summary>
+        /// Lists a single craftable with an ID, its name, and required ingredients. Requires a craftable ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult GetCraftableById(int id)
         {
@@ -65,6 +86,11 @@ namespace NMSWiki.WebAPI.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Change the name and ingredients of a craftable
+        /// </summary>
+        /// <param name="craftableEdit"></param>
+        /// <returns></returns>
         [HttpPut]
         public IHttpActionResult UpdateCraftable(CraftableEdit craftableEdit)
         {
@@ -79,6 +105,11 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Deletes a craftable from the database using its assigned ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
