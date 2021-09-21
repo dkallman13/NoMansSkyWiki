@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace NMSWiki.WebAPI.Controllers
 {
+    
     public class ResourceController : ApiController
     {
         private ResourceService CreateResourceService()
@@ -16,6 +17,10 @@ namespace NMSWiki.WebAPI.Controllers
             var resourceService = new ResourceService();
             return resourceService;
         }
+        ///
+        /// <summary>
+        /// gets all the resources
+        /// </summary>
         [HttpGet]
         public IHttpActionResult Get()
         {
