@@ -19,6 +19,10 @@ namespace NMSWiki.WebAPI.Controllers
             return ingredientService;
         }
         //get all
+        /// <summary>
+        /// Gets a list of all ingredients and their related craftable IDs and resource IDs, requires no parameters
+        /// </summary>
+        /// <returns></returns>
         public IHttpActionResult Get()
         {
             IngredientService ingredientService = CreateIngredientService();
@@ -26,6 +30,11 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok(ingredients);
         }
         //post
+        /// <summary>
+        /// Create an ingredient using a craftable ID and a resource ID
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public IHttpActionResult Post(IngredientCreate ingredient)
         {
             if (!ModelState.IsValid)
@@ -39,6 +48,11 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //get by id
+        /// <summary>
+        /// Retrieve a single ingredient via its ID and list the related craftable ID and resource ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
             IngredientService ingredientService = CreateIngredientService();
@@ -47,6 +61,11 @@ namespace NMSWiki.WebAPI.Controllers
         }
 
         //put
+        /// <summary>
+        /// Updates the related craftable ID and resource ID of single ingredient via its ID
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public IHttpActionResult Put(IngredientEdit ingredient)
         {
             if (!ModelState.IsValid)
@@ -60,6 +79,11 @@ namespace NMSWiki.WebAPI.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Deletes an ingredient from the table via its ID
+        /// </summary>
+        /// <param name="ingredientId"></param>
+        /// <returns></returns>
         public IHttpActionResult Delete(int id)
         {
             var service = CreateIngredientService();
