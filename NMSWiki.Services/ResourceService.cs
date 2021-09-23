@@ -63,7 +63,7 @@ namespace NMSWiki.Services
                     ingredient.ResourceId = iserve.GetIngredientById(IngredientIdInt).ResourceId;
                     ingredient.CraftableId = iserve.GetIngredientById(IngredientIdInt).CraftableId;
                     var query2 = ctx.Ingredients
-                        .Join(ctx.Resources, x => ingredient.IngredientId, e => IngredientIdInt, (x, e) => new IngredientResourceLookup { resource = e, ingredient = x }).Where(xe => xe.resource.IngredientId == xe.ingredient.IngredientId.ToString());
+                        .Join(ctx.Resources, x => ingredient.IngredientId, e => IngredientIdInt, (x, e) => new IngredientResourceLookup { resource = e, ingredient = x }).Where(xe => IngredientIdInt == xe.ingredient.IngredientId);
                     IngredientIdsFetched.Add($"{query2.First().ingredient.IngredientId}");
                 }
                 List<Craftable> craftable = new List<Craftable>();
