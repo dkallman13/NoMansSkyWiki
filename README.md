@@ -16,4 +16,4 @@
 ###   https://docs.google.com/spreadsheets/d/12BYFAg8QmuaLPhLfGN8vxpj2K9V5UqyWv-4NVjPRexw/edit#gid=0
 
 
-### made by Dan Kallman, Duncan Summers, and Dinara Abakirova for Blue Badge Project of Eleven Fifty Academy Software Development Course
+### made by Dan Kallman, Duncan Summers, and Dinara Abakirova
